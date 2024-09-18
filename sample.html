@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plagiarism Checker</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1, h2, h3 {
+            margin: 0.5em 0;
+        }
+
+        p {
+            margin: 0.2em 0;
+        }
+
+        /* Header */
+        header {
+            background-color: #333;
+            padding: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 1em;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #555;
+            border-radius: 5px;
+        }
+
+        .cta {
+            background-color: #ff7043;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+        }
+
+        .cta:hover {
+            background-color: #ff5722;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: linear-gradient(to bottom right, #42a5f5, #66bb6a);
+            color: white;
+            text-align: center;
+            padding: 5em 2em;
+        }
+
+        .hero h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin: 1em 0;
+        }
+
+        .cta-btn {
+            background-color: #ff7043;
+            color: white;
+            padding: 0.8em 1.5em;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: #ff5722;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 3em 2em;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .features h2 {
+            color: #42a5f5;
+            margin-bottom: 1.5em;
+            font-size: 2em;
+        }
+
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2em;
+        }
+
+        .feature {
+            background-color: #f4f4f4;
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            width: 20%;
+            min-width: 250px;
+            transition: transform 0.3s;
+        }
+
+        .feature:hover {
+            transform: scale(1.05);
+        }
+
+        .feature h3 {
+            color: #66bb6a;
+            font-size: 1.5em;
+        }
+
+        .feature p {
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2em;
+        }
+
+        footer a {
+            color: #ff7043;
+            text-decoration: none;
+            margin: 0 0.5em;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #ff5722;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
+            text-align: center;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .form-control {
+            margin-bottom: 15px;
+        }
+
+        .form-control label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-control input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #ff7043;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff5722;
+        }
+
+        #login-message {
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">Plagiarism Checker</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">How It Works</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#" class="cta" id="login-btn">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Ensure Originality in Every Assignment</h1>
+        <p>Efficient Plagiarism Detection & AI Content Analysis for Educators</p>
+        <a href="#" class="cta-btn">Get Started</a>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2>Features</h2>
+        <div class="feature-grid">
+            <div class="feature">
+                <h3>Upload Assignments</h3>
+                <p>Easily upload assignments in Word, PDF, and more formats.</p>
+            </div>
+            <div class="feature">
+                <h3>Plagiarism Detection</h3>
+                <p>Accurate detection against a vast database of sources.</p>
+            </div>
+            <div class="feature">
+                <h3>AI Content Detection</h3>
+                <p>Identify sections generated by AI tools like GPT.</p>
+            </div>
+            <div class="feature">
+                <h3>Comprehensive Reports</h3>
+                <p>Generate detailed reports with plagiarism scores and references.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Plagiarism Checker. All rights reserved.</p>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-control">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-control">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" id="login-submit">Login</button>
+            </form>
+            <p id="login-message"></p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Get elements
+        const modal = document.getElementById('loginModal');
+        const loginBtn = document.getElementById('login-btn');
+        const closeBtn = document.getElementsByClassName('close')[0];
+        const loginForm = document.getElementById('login-form');
+        const loginMessage = document.getElementById('login-message');
+
+        // Open modal on login button click
+        loginBtn.onclick = function() {
+            modal.style.display = 'flex';
+        };
+
+        // Close modal on close button click
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        };
+
+        // Close modal if user clicks outside of modal
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+        // Handle login form submission
+        loginForm.onsubmit = function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username && password) {
+                loginMessage.textContent = 'Login successful!';
+                loginMessage.style.color = 'green';
+                // You can add additional logic here, like redirecting the user or making an API call.
+            } else {
+                loginMessage.textContent = 'Please fill in both fields!';
+                loginMessage.style.color = 'red';
+            }
+        };
+    </script>
+</body>
+</html>
